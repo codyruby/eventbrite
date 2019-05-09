@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+    has_many :attendances
+    has_many :users, through: :attendances
+
     validates :start_date, presence: true
 
     validate :no_past_start_date
