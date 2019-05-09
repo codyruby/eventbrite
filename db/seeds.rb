@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 1.times do
-    User.create(email: Faker::Name.first_name + "@yopmail", description: Faker::Lorem.paragraph, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+    User.create(email: Faker::Name.first_name + "@yopmail.com", description: Faker::Lorem.paragraph, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
 end
