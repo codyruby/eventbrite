@@ -11,5 +11,5 @@
 end
 
 1.times do
-    Event.create(start_date: "15/05/2019", duration: 100, title: "Festival Rock", description: "Festival annuel de la scène Rock actuelle", price: 28, location: "Paris"
+    Event.create(start_date: "15/05/2019", duration: 100, title: "Festival Rock", description: "Festival annuel de la scène Rock actuelle", price: 28, location: "Paris")
 end
