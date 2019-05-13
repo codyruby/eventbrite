@@ -18,7 +18,7 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav">
                       <li class="nav-item active">
-                        <a class="nav-link" href="<%= %>">New Event</a>
+                        <%= link_to 'New Event', root_path, class: "nav-link" %>
                       </li>
                       <li class="nav-item dropdown">
 
@@ -29,8 +29,8 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="<%= %>">Mon profil</a>
-                          <a class="dropdown-item" href="<%= destroy_user_session_path %>">Se déconnecter</a>
+                          <%= link_to 'Mon profil', root_path, class: "dropdown-item" %>
+                          <%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
                         </div>
 
                         <% else %>
@@ -40,8 +40,8 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="<%= new_user_registration_path %>">S'inscrire</a>
-                          <a class="dropdown-item" href="<%= new_user_session_path %>">Se connecter</a>
+                          <%= link_to 'S\'inscrire', new_user_registration_path, class: "dropdown-item" %>
+                          <%= link_to 'Se connecter', new_user_session_path, class: "dropdown-item" %>
                         </div>
                       </li>
                     </ul>
