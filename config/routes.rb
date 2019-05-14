@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  get 'users/show'
-
-  get 'users/edit'
-
-  get 'users/update'
+  get '/profil', to: 'users#show'
 
   devise_for :users 
   
