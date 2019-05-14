@@ -1,0 +1,16 @@
+<!-- La vue d'un event -->
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><%= @event.title %></h1>
+    <p class="lead"><%= @event.description %></p>
+  </div>
+</div>
+
+<div class="card-body">
+    <div class="container">
+        <h5 class="card-title">Start of the event: <%= @event.start_date %></h5>
+        <h5 class="card-title">Location: <%= @event.location %></h5>
+        <h5 class="card-title">Price: <%= @event.price %></h5>
+    </div>
+</div>
