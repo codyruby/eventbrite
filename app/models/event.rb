@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   
     validate :is_multiple_of_5
     def is_multiple_of_5
-      errors.add(:duration, "must be multiple of 5 and greater or equal to 5") unless
+      errors.add(:duration, "Doit être un multiple de 5") unless
           duration % 5 == 0
     end
   
