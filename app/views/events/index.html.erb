@@ -1,14 +1,14 @@
 <!-- Vue de la page d'accueil de l'appication -->
 <h1>HI <%= params[:id] %> ! WELCOME TO EVENTBRITE :</h1>
 
-<!-- Boucle qui parcours tous les gossips -->
+<!-- Boucle qui parcours tous les events -->
 <% @events.each do |event|%>
-<!-- Affichage des information de chaques gossips -->
+<!-- Affichage des information de chaques events -->
     <div class="card text-center">
         <div class="card-body">
             <h5 class="card-title"><%= event.title %></h5>
 
-<!-- Liens vers les différentes pages qui dépendent du gossip -->
+<!-- Liens vers les différentes pages qui dépendent de l'event -->
             <%= link_to "Go to this Event", event_path(event.id), :class => "btn btn-primary"%>
 
         </div>
