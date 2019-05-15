@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-    belongs_to :creator, foreign_key: "user_id", class_name: "Event"
+    belongs_to :creator, foreign_key: "user_id", class_name: "User"
     has_many :attendances
     has_many :users, through: :attendances
     
@@ -32,4 +32,9 @@ class Event < ApplicationRecord
       }
   
     validates :location, presence: true
+
+    # Méthode pour calculer la end_date de l'event.
+    def end_date
+      start_date + duration * 60
+    end
 end
