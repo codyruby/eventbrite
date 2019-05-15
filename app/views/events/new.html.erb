@@ -38,7 +38,7 @@
 </div>
 
 <% if @event.errors.any? %>
-  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <p>Nous n'avons pas réussi à créer l'évènement pour la (ou les) raison(s) suivante(s) :</p>
   <ul>
     <% @event.errors.full_messages.each do |message| %>
       <li><%= message %></li>
