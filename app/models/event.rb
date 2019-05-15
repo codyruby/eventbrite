@@ -5,10 +5,10 @@ class Event < ApplicationRecord
     
     validates :start_date, presence: true
 
-    validate :no_past_start_date
-    def no_past_start_date
-      if self.start_date < Time.now
-        errors.add("La date du début de l'événement est déjà passé")
+    validate :date_passed
+    def date_passed
+      if start_date.present? && start_date < Date.today
+        errors.add(:start_date, ": La date est déjà passé. Veuillez indiquer une date à venir.")
       end
     end
   
@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   
     validate :is_multiple_of_5
     def is_multiple_of_5
-      errors.add(:duration, "Doit être un multiple de 5") unless
+      errors.add(:duration, ": Doit être un multiple de 5") unless
           duration % 5 == 0
     end
   
