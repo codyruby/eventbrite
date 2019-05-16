@@ -1,3 +1,3 @@
 # README
 
-# branch eventbrite_model
+# Le site est en production à l'adresse : https://eventbrite-75.herokuapp.com

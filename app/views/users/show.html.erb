@@ -1,0 +1,20 @@
+<!-- La vue du profil user -->
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><%= @user.first_name %>  <%= @user.last_name %></h1>
+    <p class="lead"> <%= @user.email %> 
+    <%= link_to "Edit your profil", edit_user_registration_path, :class => "btn btn-primary"%></p>
+    <p class="lead"><%= @user.description %></p>
+  </div>
+</div>
+
+<div class="card-body">
+    <div class="container">
+    <% @events.each do |event| %>
+    <%= event.title %>
+    <%= link_to "Go to this Event", event_path(event.id), :class => "btn btn-primary"%>
+    <% end %>
+
+    </div>
+</div>
