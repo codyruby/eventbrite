@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'attendances/index'
+
+  get 'attendances/new'
+
+  get 'attendances/create'
+
   get '/profil', to: 'users#show'
 
   devise_for :users 
