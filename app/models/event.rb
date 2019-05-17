@@ -37,4 +37,15 @@ class Event < ApplicationRecord
     def end_date
       start_date + duration * 60
     end
+
+    # Méthode pour savoir si un user participe à un évènement
+    def participate?(user)
+
+      if self.attendances.where(user_id: user.id).count > 0
+        return true
+      else
+        return false
+      end
+    end
+
 end
