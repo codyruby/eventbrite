@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'attendances/index'
-
-  get 'attendances/new'
-
-  get 'attendances/create'
 
   get '/profil', to: 'users#show'
 
@@ -11,7 +6,8 @@ Rails.application.routes.draw do
   
   resources :events
   resources :charges
-  
+  resources :attendances
+
   post "events/subscribe/:id", to: "events#subscribe", as: "event_subscription"
   
   root 'events#index'
