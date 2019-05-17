@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users 
   
   resources :events
+  resources :charges
   
   root 'events#index'
 
