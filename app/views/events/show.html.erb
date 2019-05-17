@@ -23,10 +23,20 @@
                     data-description="A month's subscription"
                     data-amount="<%= @event.price * 100 %>"
                     data-currency="EUR"
-                    data-locale="auto"></script>
-            <% end %></p>
+                    data-locale="auto">
+            </script>
+            <% end %>
+        </p>
         <% end %>
-     <% end %>
+    <% end %>
+
+    <% if current_user == @event.creator %>
+         <div class="card-body">
+ 
+            <%= link_to "Mon espace évènement", attendances_path(id: @event.id), :class => "btn btn-secondary"%>
+
+        </div>
+    <% end %>
 
   </div>
 </div>
