@@ -4,6 +4,12 @@
   <div class="container">
     <h1 class="display-4"><%= @event.title %></h1>
     <p class="lead"><%= @event.description %></p>
+    <% if current_user %>
+        <% unless current_user == @event.creator || @event.participate?(current_user) %>
+        <p><%= link_to "Participer à l'évènement", new_charge_path(id: @event.id), class: "btn btn-primary", role: "button" %></p>
+        <% end %>
+     <% end %>
+
   </div>
 </div>
 
