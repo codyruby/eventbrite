@@ -1,6 +1,6 @@
 <!-- Vue de la page d'accueil de l'appication -->
 <h1>HI <%= params[:id] %> ! WELCOME TO EVENTBRITE :</h1>
-
+<%= flash[:error] %>
 <!-- Boucle qui parcours tous les events -->
 <% @events.each do |event|%>
 <!-- Affichage des information de chaques events -->
