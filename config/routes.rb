@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :attendances
 
   post "events/subscribe/:id", to: "events#subscribe", as: "event_subscription"
+  get "events/subscribe/:id", to: "events#subscribe_free", as: "event_subscription_free"
   
   root 'events#index'
 
