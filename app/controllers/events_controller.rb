@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :only_creator, only: [:update]
   
   def index
     @events = Event.all
@@ -24,19 +25,73 @@ class EventsController < ApplicationController
     end
   end
 
+  def subscribe_free
+    @event = Event.find(params[:id])
+    @attendance = Attendance.create(user: current_user, event: @event)
+    
+    redirect_to event_path(@event.id)
+  end
+ 
+  def subscribe 
+    @event = Event.find(params[:id])
+
+    @amount = @event.price * 100
+
+    customer = Stripe::Customer.create({
+      email: params[:stripeEmail],
+      source: params[:stripeToken],
+    })
+  
+    charge = Stripe::Charge.create({
+      customer: customer.id,
+      amount: @amount,
+      description: 'Rails Stripe customer',
+      currency: 'EUR',
+    })
+
+    # Création d'une participation d'un user à l'évènement
+    @attendance = Attendance.create(stripe_customer_id: customer.id, user: current_user, event: @event)
+    
+    redirect_to event_path(@event.id)
+  
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to @event
+
+  end
+
   def edit
+    @event = Event.find(params[:id]) 
   end
 
   def update
+    @event = Event.find(params[:id])
+     if @event.update(event_params) 
+
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @event = Event.find(params[:id])
+		@event.destroy
+		redirect_to root_path
   end
 
   private
 
   def event_params
-    p params.require(:event).permit(:start_date, :duration, :description, :title, :price, :location)
+     params.require(:event).permit(:start_date, :duration, :description, :title, :price, :location)
+  end
+
+  def only_creator
+    event = Event.find(params[:id])
+    unless current_user == event.creator
+      flash[:error] = "Vous n'êtes pas le créateur de l'évènement => Impossilble de le modifier."
+     redirect_to root_path
+    end
   end
 
 end

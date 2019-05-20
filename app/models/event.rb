@@ -27,7 +27,7 @@ class Event < ApplicationRecord
     validates :price,
       presence: true,
       numericality: {
-        greater_than: 1,
+        greater_than_or_equal_to: 0,
         less_than: 1000
       }
   
@@ -37,4 +37,15 @@ class Event < ApplicationRecord
     def end_date
       start_date + duration * 60
     end
+
+    # Méthode pour savoir si un user participe à un évènement
+    def participate?(user)
+
+      if self.attendances.where(user_id: user.id).count > 0
+        return true
+      else
+        return false
+      end
+    end
+
 end
