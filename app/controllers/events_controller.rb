@@ -24,6 +24,13 @@ class EventsController < ApplicationController
     render 'new'
     end
   end
+
+  def subscribe_free
+    @event = Event.find(params[:id])
+    @attendance = Attendance.create(user: current_user, event: @event)
+    
+    redirect_to event_path(@event.id)
+  end
  
   def subscribe 
     @event = Event.find(params[:id])
