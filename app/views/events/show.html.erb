@@ -59,4 +59,8 @@
         <h5 class="card-title">Price:</h5>
         <p><%= @event.price %> €</p>
     </div>
-</div>
+    <div>
+        <%if @event.avatar.attached?%>
+            <%= image_tag @event.avatar, alt: 'avatar' %>
+        <%end%>
+    </div>
