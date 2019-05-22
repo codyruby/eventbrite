@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'avatars/create'
   get '/profil', to: 'users#show'
 
   devise_for :users 
