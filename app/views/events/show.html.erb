@@ -1,47 +1,60 @@
 <!-- La vue d'un event -->
 
 <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4"><%= @event.title %></h1>
-    <p class="lead"><%= @event.description %></p>
-    <% if current_user %>
-        <% unless current_user == @event.creator || @event.participate?(current_user) %>
-        <p><%= form_tag event_subscription_path do %>
-            <article>
-                <% if flash[:error].present? %>
-                <div id="error_explanation">
-                    <p><%= flash[:error] %></p>
-                </div>
-                <% end %>    
-            </article>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm" >
+                <h1 class="display-4"><%= @event.title %></h1>
+                <p class="lead"><%= @event.description %></p>
+                <% if current_user %>
+                    <% unless current_user == @event.creator || @event.participate?(current_user) %>
+                    <p><%= form_tag event_subscription_path do %>
+                        <article>
+                            <% if flash[:error].present? %>
+                            <div id="error_explanation">
+                                <p><%= flash[:error] %></p>
+                            </div>
+                            <% end %>    
+                        </article>
 
-                <% if @event.price == 0 %>
-                    <%= link_to "Rejoindre l'évènement", event_subscription_free_path(id: @event.id),class: "btn btn-secondary"%>
-                <% else %>
-                        <label class="amount">
-                            <p>Pour rejoindre l'évènement, merci de payer : <%= @event.price %> €</p>
-                        </label>
+                            <% if @event.price == 0 %>
+                                <%= link_to "Rejoindre l'évènement", event_subscription_free_path(id: @event.id),class: "btn btn-secondary"%>
+                            <% else %>
+                                    <label class="amount">
+                                        <p>Pour rejoindre l'évènement, merci de payer : <%= @event.price %> €</p>
+                                    </label>
 
-                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                                data-description="A month's subscription"
-                                data-amount="<%= @event.price * 100 %>"
-                                data-currency="EUR"
-                                data-locale="auto">
-                        </script>
+                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                            data-description="A month's subscription"
+                                            data-amount="<%= @event.price * 100 %>"
+                                            data-currency="EUR"
+                                            data-locale="auto">
+                                    </script>
+                            <% end %>
+                        <% end %>
+                    </p>
+                    <% end %>
                 <% end %>
-            <% end %>
-        </p>
-        <% end %>
-    <% end %>
 
-    <% if current_user == @event.creator %>
-         <div class="card-body">
-            <%= link_to "Mon espace évènement", attendances_path(id: @event.id), :class => "btn btn-secondary"%>
+                <% if current_user == @event.creator %>
+                    <h3>Changer d'avatar ?</h3>
+                        <%= form_tag event_avatars_path(@event), multipart: true do %>
+                        <%= file_field_tag :avatar %>
+                        <%= submit_tag "mettre à jour" %>
+                        <% end %>
+                    <div class="card-body">
+                        <%= link_to "Mon espace évènement", attendances_path(id: @event.id), :class => "btn btn-secondary"%>
+                    </div>
+                <% end %>
+                <div class="col-sm">
+                    <%if @event.avatar.attached?%>
+                        <%= image_tag @event.avatar, alt: 'avatar' %>
+                    <%end%>
+                </div>
+            </div>
         </div>
-    <% end %>
-
-  </div>
+    </div>   
 </div>
 
 <div class="card-body">
@@ -59,8 +72,4 @@
         <h5 class="card-title">Price:</h5>
         <p><%= @event.price %> €</p>
     </div>
-    <div>
-        <%if @event.avatar.attached?%>
-            <%= image_tag @event.avatar, alt: 'avatar' %>
-        <%end%>
-    </div>
+
