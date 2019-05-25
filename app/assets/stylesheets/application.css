@@ -12,4 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap/css/bootstrap.min
+ *= require fontawesome-free/css/all.min
+ *= require agency.min
  */
+
+
