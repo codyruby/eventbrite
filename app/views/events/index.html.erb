@@ -16,7 +16,7 @@
         <div class="col-md-4 col-sm-6 portfolio-item">
               <div class="img-fluid">
                     <%if event.avatar.attached?%>
-                        <%= image_tag event.avatar, style:'width: 90%; height: auto', alt: 'avatar' %>
+                        <%= image_tag event.avatar.variant(resize: "350x350"), alt: 'avatar' %>
                     <%end%>
                 </div>
           </a>
