@@ -36,7 +36,8 @@
                     </p>
                     <% end %>
                 <% end %>
-
+            </div>
+            <div class="col-sm" >
                 <% if current_user == @event.creator %>
                     <h3>Changer d'avatar ?</h3>
                         <%= form_tag event_avatars_path(@event), multipart: true do %>
@@ -52,6 +53,7 @@
                         <%= image_tag @event.avatar, alt: 'avatar' %>
                     <%end%>
                 </div>
+             </div>   
             </div>
         </div>
     </div>   
@@ -72,4 +74,3 @@
         <h5 class="card-title">Price:</h5>
         <p><%= @event.price %> €</p>
     </div>
-
