@@ -50,7 +50,7 @@
                 <% end %>
                 <div class="col-sm">
                     <%if @event.avatar.attached?%>
-                        <%= image_tag @event.avatar, alt: 'avatar' %>
+                        <%= image_tag @event.avatar.variant(resize: "200x200"), alt: 'avatar' %>
                     <%end%>
                 </div>
              </div>   
