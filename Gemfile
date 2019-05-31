@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'image_processing', '~> 1.9'
+gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
