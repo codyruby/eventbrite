@@ -2,6 +2,9 @@ class Event < ApplicationRecord
     belongs_to :creator, foreign_key: "user_id", class_name: "User"
     has_many :attendances
     has_many :users, through: :attendances
+
+    # Relation pour ajouter des images
+    has_one_attached :avatar
     
     validates :start_date, presence: true
 

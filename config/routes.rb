@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'avatars/create'
   get '/profil', to: 'users#show'
 
   devise_for :users 
   
-  resources :events
+  resources :events do
+    resources :avatars, only: [:create]
+  end
   resources :charges
   resources :attendances
 
