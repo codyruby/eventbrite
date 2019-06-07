@@ -1,0 +1,19 @@
+<!-- Vue de la page d'accueil de l'appication -->
+<h1>HI <%= params[:id] %> ! WELCOME TO THE ADMIN PAGE :</h1>
+
+<!-- Boucle qui parcours tous les users -->
+<% @users.each do |user|%>
+<!-- Affichage des informations de chaques user -->
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">User : 
+            <%=  %></h5>
+            <p class="card-text"><%= user.first_name %>  <%= user.last_name %></p>
+
+<!-- Liens vers les différentes pages qui dépendent du user -->
+            
+                <%= link_to 'Edit User', edit_user_registration_path, class: "btn btn-primary" %>
+                <%= link_to 'Delete', admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </div>
+    </div>
+<% end %>
