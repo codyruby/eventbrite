@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :attendances
 
   namespace :admin do
+    devise_for :users
+    
     resources :users
     root 'admin#index'
   end
