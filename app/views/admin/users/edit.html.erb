@@ -1,0 +1,30 @@
+<h1>Editing User : <%= @user.first_name %>  <%= @user.last_name %></h1>
+<h1>Editing User : <%= @user.first_name %>  <%= @user.last_name %></h1>
+
+<%= form_for @user, url: admin_user_path(params[:id]), method: :put do |form| %>
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">First name : 
+            <%= form.text_field :first_name, value: @user.first_name %>
+            <h5 class="card-title">Last name : 
+            <%= form.text_field :last_name, value: @user.last_name %>
+            <h5 class="card-title">Description : 
+            <%= form.text_area :description, value: @user.description %>
+        
+        
+        
+            <p><%= form.submit %></p>
+        </div>
+    </div>
+<% end %>
+
+<% if @user.errors.any? %>
+  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'Back', admin_root_path %>
