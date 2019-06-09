@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
-    belongs_to :creator, foreign_key: "user_id", class_name: "User"
-    has_many :attendances
-    has_many :users, through: :attendances
+    belongs_to :creator, foreign_key: "user_id", class_name: "User", dependent: :destroy
+    has_many :attendances, dependent: :destroy
+    has_many :users, through: :attendances, dependent: :destroy
 
     # Relation pour ajouter des images
     has_one_attached :avatar
