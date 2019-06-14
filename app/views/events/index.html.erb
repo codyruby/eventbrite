@@ -1,36 +1,19 @@
-  <!-- Vue de la page d'accueil de l'appication -->
+
+<!-- Vue de la page d'accueil de l'appication -->
   <!-- Event Grid -->
+  <%= render "banner" %> 
   <section class="bg-light page-section" id="portfolio">
-    <div class="container">
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">Welcome To EVENTBRITE!</h2>
-          <h3 class="section-subheading text-muted">It's Nice To Meet You</h3>
-        </div>
-      </div>
-      <div class="row">
-           <!-- Boucle qui parcours tous les events -->
-  <% @events.each do |event|%>
-        <div class="col-md-4 col-sm-6 portfolio-item">
-              <div class="img-fluid">
-                    <%if event.avatar.attached?%>
-                        <%= image_tag event.avatar.variant(resize: "350x350"), alt: 'avatar' %>
-                    <%end%>
-                </div>
-          </a>
-          <div class="portfolio-caption">
-            <h4><%= event.title %></h4>
-            <!-- Liens vers les différentes pages qui dépendent de l'event -->
-            <%= link_to "Go to this Event", event_path(event.id), :class => "btn btn-primary btn-xl text-uppercase js-scroll-trigger"%>
+      
+        <!-- Boucle qui parcours tous les events -->
+    
+        <%= render "card" %>
 
-          </div>
-        </div>
-
-        <% end %>
       </div>
     
     </div>
   </section>
+  
 
   
 
