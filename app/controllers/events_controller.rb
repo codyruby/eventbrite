@@ -18,10 +18,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params.merge(user_id: current_user.id))
     if @event.save
-    
+      flash[:success] = "Event was successfully created."
     redirect_to event_path(id: @event.id)
     else
-    render 'new'
+      flash[:error] = @event.errors.full_messages.to_sentence
+      render 'new'
     end
   end
 
