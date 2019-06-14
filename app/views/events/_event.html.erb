@@ -1,0 +1,80 @@
+<br/>
+<div class="container">        
+    <div class="row">          
+        <div class="col-md-8">            
+            <div class="col-sm">
+                <%if @event.avatar.attached?%>
+                    <%= image_tag @event.avatar.variant(resize: "200x200"), alt: 'avatar' %>
+                <%end%>
+            </div>              
+            <% if current_user == @event.creator %>
+                <h5>Changer d'avatar ?</h5>
+                <%= form_tag event_avatars_path(@event), multipart: true do %>
+                    <%= file_field_tag :avatar %><br/><br/>
+                    <%= submit_tag "mettre à jour" %>
+                <% end %>
+            <% end %>       
+        </div>            
+
+        <div class="col-md-4">
+            <strong>Date&nbsp;: </strong><br/>  
+            <%= @event.start_date.to_formatted_s(:short) %><br/><br/>
+            <h3><%= @event.title %></h3><br/>
+            <strong>Lieu&nbsp;: </strong><%= @event.location %><br/>
+            <strong>Durée&nbsp;: </strong><%= @event.duration%> min<br/>
+            <strong>Organisateur&nbsp;:</strong>
+            <%= @event.creator.first_name %> <%= @event.creator.last_name %><br/>
+            (<%= @event.creator.email %>)<br/>
+            <% if current_user == @event.creator %>
+            <%= link_to "Mon espace évènement", attendances_path(id: @event.id), :class => "btn btn-secondary"%>                            <% end %>
+        </div>         
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-8">
+                <h5>À propos de l'évèvement :</h5>
+                <%= @event.description %>
+                    <% if current_user %>
+                    <% unless current_user == @event.creator || @event.participate?(current_user) %>
+                    <p>
+                        <%= form_tag event_subscription_path do %>
+                            <article>
+                                <% if flash[:error].present? %>
+                                <div id="error_explanation">
+                                    <p><%= flash[:error] %></p>
+                                </div>
+                                <% end %>    
+                            </article>
+
+                                <% if @event.price == 0 %>
+                                    <%= link_to "Rejoindre l'évènement", event_subscription_free_path(id: @event.id),class: "btn btn-secondary"%>
+                                <% else %>
+                                        <label class="amount">
+                                            <p>Pour rejoindre l'évènement, merci de payer : <%= @event.price %> €</p>
+                                        </label>
+
+                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                                data-description="A month's subscription"
+                                                data-amount="<%= @event.price * 100 %>"
+                                                data-currency="EUR"
+                                                data-locale="auto">
+                                        </script>
+                                <% end %>
+                            <% end %>
+                    </p>
+                    <% end %>
+                <% end %>
+        </div>
+        <div class="col-md-4">
+                <h5>Infos complémentaires :</h5>
+                <p>
+                    <strong>Date et heure&nbsp;:<br/> 
+                    </strong><%= @event.start_date.to_formatted_s(:long_ordinal) %> - <%= @event.end_date.to_formatted_s(:long_ordinal) %><br/>
+                    <strong>Prix&nbsp;: </strong><%= @event.price%>€<br/>
+                    <strong>Nombre de participants&nbsp;:</strong>
+                    <%= @event.users.count %>
+                </p>
+        </div> 
+    </div>  
+</div>           
