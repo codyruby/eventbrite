@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'image_processing', '~> 1.9'
+gem 'image_processing', '~> 1.12'
 gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
 
 # Use CoffeeScript for .coffee assets and views
